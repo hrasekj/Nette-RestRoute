@@ -28,6 +28,8 @@ class RestRoute extends Object implements IRouter {
 
   const MODULE_VERSION_PATH_PREFIX_PATTERN = '/v[0-9\.]+/';
 
+  const VERSION_EXISTS = 'versionExists';
+
   /** @var string */
   protected $path;
 
@@ -165,7 +167,8 @@ class RestRoute extends Object implements IRouter {
       $httpRequest->getMethod(),
       $params,
       [],
-      $httpRequest->getFiles()
+      $httpRequest->getFiles(),
+      [self::VERSION_EXISTS => array_key_exists($version, $this->versionToModuleMapping)]
     );
   }
 
